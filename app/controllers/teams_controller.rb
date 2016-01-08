@@ -17,6 +17,14 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
   end
 
+  def find
+  end
+
+  def find_to_user
+    @team = Team.find_by(name: params[:find_team][:team])
+    redirect_to new_team_user_path(@team)
+  end
+
   private
 
   def team_params

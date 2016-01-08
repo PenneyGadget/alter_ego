@@ -1,12 +1,12 @@
-<%= form_for @admin, url: create_admin_path do |f| %>
+<%= form_for @user, url: team_users_path do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <br>
   <%= f.label :tagline %>
   <%= f.text_field :tagline %>
   <br>
-  <%= f.label :word %>
-  <%= f.text_field :word %>
+  <%= f.label :gif_link, "Word" %>
+  <%= f.text_field :gif_link %>
   <br>
   <%= f.label :username %>
   <%= f.text_field :username %>
@@ -14,8 +14,10 @@
   <%= f.label :password %>
   <%= f.password_field :password %>
   <br>
-  <%= f.label "Password Confirmation" %>
+  <%= f.label :password_confirmation, "Password Confirmation" %>
   <%= f.password_field :password_confirmation %>
   <br>
+  <% f.hidden_field :team_id, :value => @team.id %>
+
   <%= f.submit "Create Account" %>
 <% end %>

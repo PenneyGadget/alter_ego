@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+ root 'home#index'
+
+ get '/users/new', to: 'users#new'
+
+ post '/teams/find_to_user', to: 'teams#find_to_user'
+
+ get '/teams/find', to: 'teams#find'
+
  get '/login', to: 'sessions#new'
  post '/login', to: 'sessions#create'
 
@@ -13,5 +21,5 @@ Rails.application.routes.draw do
   #  end
  end
  # post '/user_gifs', to: 'sessions#create'
- root 'home#index'
+
 end
