@@ -2,8 +2,10 @@
 <%= simple_form_for :find_team, { url: teams_find_to_user_path } do |f| %>
 
   <%= f.label :team, "Team Name" %>
-  <%= f.input :team %>
+  <%= f.text_field :team %>
+  <br><br>
   <%= f.label :password, "Team Passcode" %>
-  <%= f.input :password %>
+  <%= f.text_field :password %>
+  <br><br>
   <%= f.submit "Join Team" %>
 <% end %>
