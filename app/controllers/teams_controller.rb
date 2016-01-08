@@ -13,6 +13,10 @@ class TeamsController < ApplicationController
     redirect_to new_team_admin_path(@team)
   end
 
+  def show
+    @team = Team.find(params[:id])
+  end
+
   private
 
   def team_params
