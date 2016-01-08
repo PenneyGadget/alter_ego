@@ -1,0 +1,21 @@
+<%= form_for @admin do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :tagline %>
+  <%= f.text_field :tagline %>
+  <br>
+  <%= f.label :word %>
+  <%= f.text_field :word %>
+  <br>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+  <br>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <br>
+  <%= f.label "Password Confirmation" %>
+  <%= f.password_field :password_confirmation %>
+  <br>
+  <%= f.submit "Create Account" %>
+<% end %>

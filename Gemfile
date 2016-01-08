@@ -36,11 +36,11 @@ gem 'rails_12factor', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'pry'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
-  gem 'database_cleaner'  
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
 
 end
