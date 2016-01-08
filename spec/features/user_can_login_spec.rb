@@ -25,7 +25,7 @@ RSpec.feature "A registered user can login" do
 
     expect(current_path).to eq team_path(team)
 
-    #test flash notice
+    #expect flash notice
     expect(page).to have_content "Team: 1510"
     expect(page).to have_content "Penney"
     #expect to have gif/image/css
