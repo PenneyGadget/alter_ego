@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.save
       redirect_to team_path(@team)
-    elsif User.find_by(params[:username])
+    elsif User.find_by(username: params[:user][:username])
       flash[:error] = "Username is already taken"
       redirect_to new_team_user_path(@team)
     elsif missing_param?

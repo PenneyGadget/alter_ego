@@ -10,6 +10,8 @@ class SessionsController < ApplicationController
 
       redirect_to team_path(user.team_id)
     else
+      flash[:notice] = "Username could not be found or password incorrect"
+      redirect_to login_path
     end
   end
 
