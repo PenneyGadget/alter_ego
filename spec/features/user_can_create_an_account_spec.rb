@@ -31,5 +31,6 @@ RSpec.feature "User can create an account" do
     expect(page).to have_content "1510"
     expect(page).to have_content "Penney"
     #expect page to have image
+
   end
 end

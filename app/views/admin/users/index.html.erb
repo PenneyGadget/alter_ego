@@ -1,0 +1,14 @@
+<h1> Users for Team <%= @team.name %> </h1>
+
+<% @users.each_with_index do |user, index| %>
+  <li>
+
+      <%= link_to(user.name, team_admin_users_path(user)) %>
+      <%= link_to "Delete User", team_user_path(@team, user.id), method: :delete %>
+
+
+  </li><br>
+
+<% end %>
+
+<br><br> <%= link_to "<< Back to Team Page", team_path(@team) %>

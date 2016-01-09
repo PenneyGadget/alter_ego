@@ -1,0 +1,13 @@
+<h1> <%= @team.name %> Teammates </h1>
+
+<% @users.all do |user| %>
+
+  <%= link_to user.name, team_user_path(user) %>
+
+<% end %>
+
+
+<% if current_admin? %>
+  <%= link_to "Edit Teammates", team_admin_users %>
+
+<% else %>

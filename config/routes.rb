@@ -13,14 +13,18 @@ Rails.application.routes.draw do
  delete '/logout', to: 'sessions#destroy'
 
  resources :teams, except: [:index] do
-   resources :admins, only: [:new, :create] do
-     resources :users, only: [:destroy, :index]
+   namespace :admin do
+     resources :users, only: [:index]
+     resources :teams, only: [:edit]
    end
 
+   resources :admins, only: [:new, :create]
    resources :users
   #    resources :votes, only: [:create]
   #  end
  end
+
+ resources :users, only: [:delete]
  # post '/user_gifs', to: 'sessions#create'
 
 end
