@@ -13,7 +13,15 @@ class UsersController < ApplicationController
   def create
     @team = Team.find(params[:team_id])
     @user = User.create(user_params)
-    redirect_to team_path(params[:team_id])
+    if @user.save
+      redirect_to team_path(@team)
+    elsif User.find_by(params[:username])
+      flash[:error] = "Username is already taken"
+      redirect_to new_team_user_path(@team)
+    elsif missing_param?
+      flash[:error] = "Field is missing. All fields required"
+      redirect_to new_team_user_path(@team)
+    end
   end
 
   def destroy
@@ -34,6 +42,10 @@ class UsersController < ApplicationController
                                              :password_confirmation)
     user_hash[:team_id] = @team.id
     user_hash
+  end
+
+  def missing_param?
+    user_params
   end
 
 end

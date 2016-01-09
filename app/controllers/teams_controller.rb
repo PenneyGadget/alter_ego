@@ -10,7 +10,12 @@ class TeamsController < ApplicationController
 
   def create
     @team = Team.create(team_params)
-    redirect_to new_team_admin_path(@team)
+    if @team.save
+      redirect_to new_team_admin_path(@team)
+    else
+      flash[:error] = "Team name is already taken"
+      redirect_to new_team_path
+    end
   end
 
   def show

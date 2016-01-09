@@ -7,8 +7,15 @@ class AdminsController < ApplicationController
   def create
     @team = Team.find(params[:team_id])
     @admin = User.create(admin_params)
-
-    redirect_to team_path(@team)
+    if @admin.save
+      redirect_to team_path(@team)
+    elsif User.find_by(params[:username])
+      flash[:error] = "Username is already taken"
+      redirect_to new_team_admin_path(@team)
+    elsif missing_param?
+      flash[:error] = "Field is missing. All fields required"
+      redirect_to new_team_admin_path(@team)
+    end
   end
 
   private
@@ -24,5 +31,10 @@ class AdminsController < ApplicationController
     admin_hash[:team_id] = @team.id
     admin_hash
   end
+
+  def missing_param?
+    admin_params
+  end
+
 
 end
