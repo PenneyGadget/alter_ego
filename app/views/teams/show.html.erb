@@ -1,6 +1,9 @@
 <h1> Team: <%= @team.name %> </h1>
 
 <% @team.users.each do |user| %>
+
+  <%= image_tag user.gif_link %>
+
   <%= user.name %>
 <% end %>
 <br>

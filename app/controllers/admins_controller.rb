@@ -29,6 +29,7 @@ class AdminsController < ApplicationController
                                                :password_confirmation)
     admin_hash[:role] = 1
     admin_hash[:team_id] = @team.id
+    admin_hash[:gif_link] = Giphy.random(params[:user][:gif_link]).image_original_url.to_s
     admin_hash
   end
 

@@ -14,6 +14,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'simple_form'
 gem 'shoulda-matchers'
+gem 'giphy'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

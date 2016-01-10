@@ -2,6 +2,8 @@
 
 <% @users.all do |user| %>
 
+  <%= image_tag Giphy.random(user.gif_link).image_original_url.to_s %>
+
   <%= link_to user.name, team_user_path(user) %>
 
 <% end %>

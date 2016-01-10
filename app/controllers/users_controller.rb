@@ -41,6 +41,7 @@ class UsersController < ApplicationController
                                              :password,
                                              :password_confirmation)
     user_hash[:team_id] = @team.id
+    user_hash[:gif_link] = Giphy.random(params[:user][:gif_link]).image_original_url.to_s
     user_hash
   end
 
