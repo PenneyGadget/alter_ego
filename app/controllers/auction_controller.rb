@@ -1,14 +1,14 @@
 class AuctionController < ApplicationController
 
   def create
-    @team = Team.find(team_hash)
+    @team = Team.find(set_team)
     @auction = Auction.create(team)
   end
 
   def update_votes
     @auction = Auction.find(params[:id])
 
-    @auction.update(update_votes)
+    @auction.update(update_team)
   end
 
   def declare_winner
