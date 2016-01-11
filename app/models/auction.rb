@@ -1,6 +1,7 @@
 class Auction < ActiveRecord::Base
 
   belongs_to :teams
+  belongs_to :users
 
   attr_reader :votes
 

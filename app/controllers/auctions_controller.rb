@@ -26,14 +26,14 @@ class AuctionsController < ApplicationController
     redirect_to team_auction_path(@team, @auction)
   end
 
-  # def declare_winner
-  #   @auction = Auction.find(params[:auction_id])
-  #   @team = Team.find(params[:team_id])
-  #   @auction.update(winner)
-  #   @user = User.find_by(username: winner[:winner])
-  #
-  #   redirect_to team_auction_user_update_user_gif_path(@team, @auction, @user)
-  # end
+  def declare_winner
+    @auction = Auction.find(params[:auction_id])
+    @team = Team.find(params[:team_id])
+    @auction.update(winner)
+    @user = User.find_by(username: winner[:winner])
+
+    redirect_to team_auction_user_update_user_gif_path(@team, @auction, @user)
+  end
 
   private
 
@@ -42,7 +42,8 @@ class AuctionsController < ApplicationController
                  team_members_vote: create_team_hash,
                  gif_link: Giphy.random.image_original_url.to_s,
                  winner: "pending",
-                 team_id: params[:team_id]}
+                 team_id: params[:team_id],
+                 }
   end
 
   def update_auction

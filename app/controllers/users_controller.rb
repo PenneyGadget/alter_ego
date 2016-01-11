@@ -34,6 +34,7 @@ class UsersController < ApplicationController
   def update_user_gif
     @user = User.find(params[:user_id])
     @auction = Auction.find(params[:auction][:auction_id])
+    @auction.update(user_id: @user.id)
     @team = Team.find(params[:team_id])
     @user.update(assign_gif)
 

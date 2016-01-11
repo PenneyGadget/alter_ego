@@ -1,14 +1,59 @@
 <h1> Team: <%= @team.name %> </h1>
 
 <h2> Current Gif: </h2>
+
+  <div id="countdown"></div>
+    <script type="text/javascript">
+
+    window.onload = function() {
+      function countdown( elementName, minutes, seconds )
+      {
+      var element, endTime, hours, mins, msLeft, time;
+
+      function twoDigits( n )
+      {
+          return (n <= 9 ? "0" + n : n);
+      }
+
+      function updateTimer()
+      {
+          msLeft = endTime - (+new Date);
+          if ( msLeft < 1000 ) {
+            // console.log('this executed');
+            $('.winner_form').submit();
+            // window.location.reload();
+          } else {
+              time = new Date( msLeft );
+              hours = time.getUTCHours();
+              mins = time.getUTCMinutes();
+              element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+              setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+          }
+      }
+
+      element = document.getElementById( elementName );
+      endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+      updateTimer();
+      }
+
+      countdown( "countdown", 1, 0 );
+      // countdown( "countdown2", 100, 0 );
+    }
+    </script>
+
+  <div id="countdown2"></div>
+
   <div>
     <%= image_tag @auction.gif_link %>
-    <% if @admin %>
-      <%= form_for @auction, url: team_user_declare_winner_path(@team, @user) do |f| %>
+
+      <%= form_for @auction, url: team_user_declare_winner_path(@team, @user), :html => {:class => "winner_form"} do |f| %>
         <%= f.hidden_field :auction_id, :value => @auction.id %>
         <%= f.submit "Declare Winner" %>
       <% end %>
-    <% end %>
+
+      <!-- <%= form_tag team_user_declare_winner_path(@team, @user), method: :patch, remote: true, :html => {:class => "winner_form"} do %>
+        <%= hidden_field_tag :auction_id, @auction.id %>
+      <% end %> -->
   </div>
 
 

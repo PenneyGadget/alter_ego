@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
       flash[:notice] = "Welcome back #{user.name}"
-      redirect_to team_path(user.team_id)
+      auction = Auction.where(team_id: user.team_id).last
+      redirect_to team_auction_path(user.team_id, auction)
     else
       flash[:notice] = "Username could not be found or password incorrect"
       redirect_to login_path
