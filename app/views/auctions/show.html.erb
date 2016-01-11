@@ -56,14 +56,15 @@
   </div>
 
 <br><br>
-<h2> Team Member Gifs </h2>
+<h2> Vote to Give Current Gif to a Team Member: </h2>
 
 <% @team.users.each do |user| %>
 
   <%= image_tag user.gif_link %>
   </br>
   </br>
-  <%= user.name %>
+  <%= user.name %><br>
+  <%= user.tagline %>
 
   <%= form_for @auction, url: team_auction_update_votes_path(@team, @auction) do |f| %>
     <%= f.hidden_field :username, :value => user.username.to_s %>
