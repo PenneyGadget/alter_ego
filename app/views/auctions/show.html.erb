@@ -48,7 +48,6 @@
 
       <%= form_for @auction, url: team_user_declare_winner_path(@team, @user), :html => {:class => "winner_form"} do |f| %>
         <%= f.hidden_field :auction_id, :value => @auction.id %>
-        <%= f.submit "Declare Winner" %>
       <% end %>
 
       <!-- <%= form_tag team_user_declare_winner_path(@team, @user), method: :patch, remote: true, :html => {:class => "winner_form"} do %>
