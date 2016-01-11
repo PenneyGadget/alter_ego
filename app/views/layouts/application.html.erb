@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AlterEgo</title>
+  <title>hold_my_music</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <!--Navigation-->
+   <div class="navbar-fixed">
+      <nav id="nav_f" class="default_color" role="navigation">
+          <div class="container">
+              <div class="nav-wrapper">
+              <h3 class="center hide-on-med-and-down">
+                <a class="left brand-logo" href="/">Alter Ego</a>
+              </h3>
+                  <ul class="right hide-on-med-and-down">
+                      <li><a href="/login">Login</a></li>
+                      <li><a href="/teams/new">Create Team</a></li>
+                      <li><a href="/teams/find">Join Team</a></li>
+                  </ul>
+                  <ul id="nav-mobile" class="side-nav">
+                    <li><a href="#intro">Playlists</a></li>
+                    <li><a href="#work">Artists</a></li>
+                    <li><a href="#team">Song</a></li>
+                  </ul>
+              <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+              </div>
+          </div>
+      </nav>
+  </div>
 
 <% flash.each do |type, msg| %>
   <%= content_tag :div, msg, class: "flash-#{type}" %>
