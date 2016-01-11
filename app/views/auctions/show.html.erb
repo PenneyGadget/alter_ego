@@ -54,7 +54,7 @@
         <%= hidden_field_tag :auction_id, @auction.id %>
       <% end %> -->
   </div>
-  
+
 <br><br>
 <h2> Team Member Gifs </h2>
 
@@ -64,6 +64,7 @@
   </br>
   </br>
   <%= user.name %>
+  <%= user.tagline %>
 
   <%= form_for @auction, url: team_auction_update_votes_path(@team, @auction) do |f| %>
     <%= f.hidden_field :username, :value => user.username.to_s %>
