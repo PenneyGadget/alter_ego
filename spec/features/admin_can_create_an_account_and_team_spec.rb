@@ -22,7 +22,10 @@ RSpec.feature "Admin can create an account and team" do
     fill_in "Password", with: "password"
     fill_in "Password Confirmation", with: "password"
     click_on "Create Account"
-    expect(current_path).to eq team_path(@team)
+
+    @auction = Auction.find_by(team_id: @team.id)
+
+    expect(current_path).to eq team_auction_path(@team, @auction)
 
     expect(page).to have_content "1510"
     expect(page).to have_content "Penney"

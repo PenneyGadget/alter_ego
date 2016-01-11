@@ -13,8 +13,9 @@ class UsersController < ApplicationController
   def create
     @team = Team.find(params[:team_id])
     @user = User.create(user_params)
+    @auction = Auction.find_by(team_id: @team.id)
     if @user.save
-      redirect_to team_path(@team)
+      redirect_to team_auction_path(@team, @auction)
     elsif User.find_by(username: params[:user][:username])
       flash[:error] = "Username is already taken"
       redirect_to new_team_user_path(@team)
@@ -28,6 +29,17 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     redirect_to team_admin_users_path
+  end
+
+  def update_user_gif
+    @user = User.find(params[:user_id])
+    @auction = Auction.find(params[:auction][:auction_id])
+    @team = Team.find(params[:team_id])
+    @user.update(assign_gif)
+
+    flash[:notice] = "Winner of previous round: #{@user.name}"
+
+    redirect_to new_team_auction_path(@team)
   end
 
   private
@@ -47,6 +59,10 @@ class UsersController < ApplicationController
 
   def missing_param?
     user_params
+  end
+
+  def assign_gif
+    {gif_link: @auction.gif_link}
   end
 
 end

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
  root 'home#index'
 
  get '/users/new', to: 'users#new'
+ patch '/declare_winner', to: 'users#update_user_gif'
 
  post '/teams/find_to_user', to: 'teams#find_to_user'
 
@@ -13,18 +14,25 @@ Rails.application.routes.draw do
  delete '/logout', to: 'sessions#destroy'
 
  resources :teams, except: [:index] do
-   namespace :admin do
-     resources :users, only: [:index]
-     resources :teams, only: [:edit]
-   end
 
    resources :admins, only: [:new, :create]
-   resources :users
-  #    resources :votes, only: [:create]
-  #  end
+
+   namespace :admin do
+     resources :users, only: [:index, :destroy]
+     resources :teams, only: [:edit]
+     resources :auctions
+   end
+
+   resources :users do
+     patch '/declare_winner', to: 'users#update_user_gif'
+   end
+
+   resources :auctions, only: [:show, :new] do
+     patch '/update_votes', to: 'auctions#update_votes'
+   end
+
  end
 
- resources :users, only: [:delete]
+ # resources :users, only: [:delete]
  # post '/user_gifs', to: 'sessions#create'
-
 end

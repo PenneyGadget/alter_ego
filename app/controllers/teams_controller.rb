@@ -27,7 +27,11 @@ class TeamsController < ApplicationController
 
   def find_to_user
     @team = Team.find_by(name: params[:find_team][:team])
-    redirect_to new_team_user_path(@team)
+    if @team
+      redirect_to new_team_user_path(@team)
+    else
+      flash[:error] = "Invalid Team Name"
+    end
   end
 
   private

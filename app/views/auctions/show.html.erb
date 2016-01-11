@@ -1,0 +1,30 @@
+<h1> Team: <%= @team.name %> </h1>
+
+<h2> Current Gif: </h2>
+  <div>
+    <%= image_tag @auction.gif_link %>
+    <% if @admin %>
+      <%= form_for @auction, url: team_user_declare_winner_path(@team, @user) do |f| %>
+        <%= f.hidden_field :auction_id, :value => @auction.id %>
+        <%= f.submit "Declare Winner" %>
+      <% end %>
+    <% end %>
+  </div>
+
+
+<% @team.users.each do |user| %>
+
+  <%= image_tag user.gif_link %>
+  </br>
+  </br>
+  <%= user.name %>
+
+  <%= form_for @auction, url: team_auction_update_votes_path(@team, @auction) do |f| %>
+    <%= f.hidden_field :username, :value => user.username.to_s %>
+    <%= f.submit "Vote for #{user.name}" %>
+  <% end %>
+<br>
+
+<% end %>
+
+<%= link_to "Logout", logout_path, method: :delete %>

@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
       flash[:notice] = "Welcome back #{user.name}"
-
       redirect_to team_path(user.team_id)
     else
       flash[:notice] = "Username could not be found or password incorrect"
