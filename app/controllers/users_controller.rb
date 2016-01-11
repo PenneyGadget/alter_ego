@@ -34,13 +34,20 @@ class UsersController < ApplicationController
   def update_user_gif
     @user = User.find(params[:user_id])
     @auction = Auction.find(params[:auction][:auction_id])
-    @auction.update(user_id: @user.id)
     @team = Team.find(params[:team_id])
-    @user.update(assign_gif)
 
-    flash[:notice] = "Winner of previous round: #{@user.name}"
+    if valid_winner?
+      flash[:notice] = "No winner previous round"
 
-    redirect_to new_team_auction_path(@team)
+      redirect_to new_team_auction_path(@team)
+    else
+      @auction.update(user_id: @user.id)
+      @user.update(assign_gif)
+
+      flash[:notice] = "Winner of previous round: #{@user.name}"
+
+      redirect_to new_team_auction_path(@team)
+    end
   end
 
   private
@@ -64,6 +71,10 @@ class UsersController < ApplicationController
 
   def assign_gif
     {gif_link: @auction.gif_link}
+  end
+
+  def valid_winner?
+    eval(@auction.team_members_vote)[@user.username.to_sym] == 0
   end
 
 end
